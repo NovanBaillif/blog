@@ -10,7 +10,9 @@ import NewsletterForm from '@/components/NewsletterForm'
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog')
+  // I'm assuming you have a separate file or API to fetch data specific to your ERP project
+  // Modify the function to fetch data related to your project instead of 'blog' posts
+  const posts = await getAllFilesFrontMatter('erp')
 
   return { props: { posts } }
 }
@@ -22,23 +24,23 @@ export default function Home({ posts }) {
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
+            Kreol Factory ERP
             <div className="flex justify-end text-base font-medium leading-6">
               <Link
-                href="/menucard"
+                href="/features"
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label="all posts"
+                aria-label="all features"
               >
-                All Posts &rarr;
+                Toutes les fonctionnalités &rarr;
               </Link>
             </div>
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            Gérez votre restaurant avec transparence et durabilité environnementale.
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
+          {!posts.length && 'Aucune fonctionnalité trouvée.'}
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
             const { slug, date, title, summary, tags } = frontMatter
             return (
@@ -46,7 +48,7 @@ export default function Home({ posts }) {
                 <article>
                   <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
-                      <dt className="sr-only">Published on</dt>
+                      <dt className="sr-only">Publié le</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                         <time dateTime={date}>{formatDate(date)}</time>
                       </dd>
@@ -56,7 +58,7 @@ export default function Home({ posts }) {
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              href={`/blog/${slug}`}
+                              href={`/features/${slug}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}
@@ -71,40 +73,39 @@ export default function Home({ posts }) {
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
-                      </div>
-                    </div>
+                                          </div>
+                  <div className="text-base font-medium leading-6">
+                    <Link
+                      href={`/features/${slug}`}
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      aria-label={`En savoir plus sur "${title}"`}
+                    >
+                      Lire la suite &rarr;
+                    </Link>
                   </div>
-                </article>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter.provider !== '' && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
-    </>
-  )
-}
+                </div>
+              </div>
+            </article>
+          </li>
+        )
+      })}
+    </ul>
+  </div>
+  {posts.length > MAX_DISPLAY && (
+    <div className="flex justify-end text-base font-medium leading-6">
+      <Link
+        href="/features"
+        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+        aria-label="all features"
+      >
+        Toutes les fonctionnalités &rarr;
+      </Link>
+    </div>
+  )}
+  {siteMetadata.newsletter.provider !== '' && (
+    <div className="flex items-center justify-center pt-4">
+      <NewsletterForm />
+    </div>
+  )}
+</>
+}}
