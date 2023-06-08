@@ -10,9 +10,7 @@ import NewsletterForm from '@/components/NewsletterForm'
 const MAX_DISPLAY = 5
 
 export async function getStaticProps() {
-  // I'm assuming you have a separate file or API to fetch data specific to your ERP project
-  // Modify the function to fetch data related to your project instead of 'blog' posts
-  const posts = await getAllFilesFrontMatter('erp')
+  const posts = await getAllFilesFrontMatter('blog')
 
   return { props: { posts } }
 }
