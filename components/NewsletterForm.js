@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 
 import siteMetadata from '@/data/siteMetadata'
 
-const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
+const NewsletterForm = ({ title = 'Inscrivez vous à la newsletter' }) => {
   const inputEl = useRef(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
@@ -40,7 +40,7 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
       <form className="flex flex-col sm:flex-row" onSubmit={subscribe}>
         <div>
           <label className="sr-only" htmlFor="email-input">
-            Email address
+            Addresse email:
           </label>
           <input
             autoComplete="email"
