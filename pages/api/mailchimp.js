@@ -1,5 +1,9 @@
 import mailchimp from '@mailchimp/mailchimp_marketing'
 
+console.log('MAILCHIMP_API_KEY:', process.env.MAILCHIMP_API_KEY)
+console.log('MAILCHIMP_API_SERVER:', process.env.MAILCHIMP_API_SERVER)
+console.log('MAILCHIMP_AUDIENCE_ID:', process.env.MAILCHIMP_AUDIENCE_ID)
+
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
   server: process.env.MAILCHIMP_API_SERVER, // E.g. us1
