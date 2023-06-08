@@ -14,12 +14,17 @@ export default async (req, res) => {
   }
 
   try {
-    const test = await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
+    await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
       email_address: email,
       status: 'subscribed',
     })
     return res.status(201).json({ error: '' })
   } catch (error) {
-    return res.status(500).json({ error: error.message || error.toString() })
+    console.error(error) // Log the error for debugging
+    if (error.status === 400 && error.title === 'Member Exists') {
+      return res.status(400).json({ error: 'That email address is already a list member' })
+    } else {
+      return res.status(500).json({ error: error.message || error.toString() })
+    }
   }
 }
