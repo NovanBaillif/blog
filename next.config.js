@@ -5,7 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app kreolfactory-com.disqus.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src 'none';
@@ -49,20 +49,6 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
-  },
-  // CORS headers
-  {
-    key: 'Access-Control-Allow-Origin',
-    value: '*',
-  },
-  {
-    key: 'Access-Control-Allow-Methods',
-    value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-  },
-  {
-    key: 'Access-Control-Allow-Headers',
-    value:
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
   },
 ]
 
