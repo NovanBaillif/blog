@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const MenuPlanning = () => {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -47,7 +46,7 @@ const MenuPlanning = () => {
               onClick={() => {}}
             >
               <h2 className="text-lg font-medium">{dayMenu.day}</h2>
-              <ExpandMoreIcon className="text-gray-500" />
+              <span className="text-gray-500">+</span>
             </button>
             <div>{renderMenuItems(dayMenu.dishes)}</div>
           </div>
@@ -69,7 +68,7 @@ const MenuPlanning = () => {
               onClick={() => {}}
             >
               <h2 className="text-lg font-medium">{category}</h2>
-              <ExpandMoreIcon className="text-gray-500" />
+              <span className="text-gray-500">+</span>
             </button>
             <div>{renderMenuItems(dailyMenu.filter((item) => item.category === category))}</div>
           </div>
