@@ -73,7 +73,7 @@ const ProductManager = () => {
   return (
     <div>
       {showForm && (
-        <div className="fixed top-0 right-0 bottom-0 left-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="bottom-0·left-0·right-0·top-0 fixed z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="mx-auto max-w-sm rounded-md bg-white p-4 shadow-lg">
             <h2 className="mb-4 text-xl font-semibold">Add Product</h2>
             <form onSubmit={handleAddProduct} className="space-y-4">
@@ -160,7 +160,7 @@ const ProductManager = () => {
           </table>
         </div>
         <button
-          className="fixed right-8 bottom-8 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg"
+          className="bottom-8·right-8 fixed flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500 text-white shadow-lg"
           onClick={() => setShowForm((prevShowForm) => !prevShowForm)}
         >
           {showForm ? '-' : '+'}
