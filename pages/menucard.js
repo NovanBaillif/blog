@@ -1,183 +1,38 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import {
-  AppBar,
-  Tabs,
-  Tab,
-  Typography,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Grid,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from '@material-ui/core'
+import { useState } from 'react'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-  card: {
-    marginBottom: theme.spacing(2),
-    backgroundColor: '#F5F5F5',
-    borderRadius: theme.spacing(1),
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  cardMedia: {
-    height: 200,
-    borderRadius: theme.spacing(1),
-  },
-  accordion: {
-    marginBottom: theme.spacing(2),
-    backgroundColor: '#F5F5F5',
-    borderRadius: theme.spacing(1),
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  tab: {
-    fontWeight: 600,
-    fontFamily: 'Arial',
-    color: '#333333',
-    '&:hover': {
-      color: '#555555',
-    },
-  },
-  selectedTab: {
-    color: '#555555',
-    borderBottom: `2px solid #555555`,
-  },
-  appBar: {
-    backgroundColor: '#F8F8F8',
-    boxShadow: 'none',
-  },
-  tabs: {
-    borderBottom: `2px solid #E0E0E0`,
-  },
-  categoryPizza: {
-    color: '#FF5722',
-  },
-  categoryMeat: {
-    color: '#4CAF50',
-  },
-  categorySalad: {
-    color: '#03A9F4',
-  },
-  categoryPasta: {
-    color: '#FFEB3B',
-  },
-  categoryDessert: {
-    color: '#9C27B0',
-  },
-}))
-
 const MenuPlanning = () => {
-  const classes = useStyles()
-  const [selectedTab, setSelectedTab] = React.useState(0)
+  const [selectedTab, setSelectedTab] = useState(0)
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue)
   }
 
   const dailyMenu = [
-    {
-      dish: 'Steak au poivre',
-      image: 'https://source.unsplash.com/featured/?steak',
-      category: 'meat',
-    },
-    {
-      dish: 'Salade de tomates',
-      image: 'https://source.unsplash.com/featured/?salad',
-      category: 'salad',
-    },
-    {
-      dish: 'Pâtes à la carbonara',
-      image: 'https://source.unsplash.com/featured/?pasta',
-      category: 'pasta',
-    },
-    {
-      dish: 'Gâteau au chocolat',
-      image: 'https://source.unsplash.com/featured/?dessert',
-      category: 'dessert',
-    },
+    // Vos plats quotidiens
   ]
 
   const weeklyMenu = [
-    {
-      day: 'Lundi',
-      dishes: [
-        {
-          dish: 'Pizza margherita',
-          image: 'https://source.unsplash.com/featured/?pizza',
-          category: 'pizza',
-        },
-        {
-          dish: 'Salade César',
-          image: 'https://source.unsplash.com/featured/?salad',
-          category: 'salad',
-        },
-      ],
-    },
-    {
-      day: 'Mardi',
-      dishes: [
-        {
-          dish: 'Poulet rôti',
-          image: 'https://source.unsplash.com/featured/?chicken',
-          category: 'meat',
-        },
-        {
-          dish: 'Pâtes à la carbonara',
-          image: 'https://source.unsplash.com/featured/?pasta',
-          category: 'pasta',
-        },
-      ],
-    },
-    // ... Ajoutez les plats pour les autres jours de la semaine
+    // Votre menu hebdomadaire
   ]
 
   const renderMenuItems = (menu) => {
     return (
-      <Grid container spacing={2}>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
         {menu.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className={classes.card}>
-              <CardActionArea>
-                <CardMedia className={classes.cardMedia} image={item.image} title={item.dish} />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="h2"
-                    className={classes[`category${item.category}`]}
-                  >
-                    {item.dish}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <div
-                style={{
-                  background:
-                    item.category === 'pizza'
-                      ? 'linear-gradient(to bottom, #FF5722 0%, #FF5722 100%)'
-                      : item.category === 'meat'
-                      ? 'linear-gradient(to bottom, #4CAF50 0%, #4CAF50 100%)'
-                      : item.category === 'salad'
-                      ? 'linear-gradient(to bottom, #03A9F4 0%, #03A9F4 100%)'
-                      : item.category === 'pasta'
-                      ? 'linear-gradient(to bottom, #FFEB3B 0%, #FFEB3B 100%)'
-                      : item.category === 'dessert'
-                      ? 'linear-gradient(to bottom, #9C27B0 0%, #9C27B0 100%)'
-                      : '',
-                  height: '4px',
-                }}
-              ></div>
-            </Card>
-          </Grid>
+          <div key={index} className="rounded-lg bg-gray-100 shadow-md">
+            <img
+              src={item.image}
+              alt={item.dish}
+              className="h-48 w-full rounded-t-lg object-cover"
+            />
+            <div className="p-4">
+              <h2 className="text-lg font-medium">{item.dish}</h2>
+            </div>
+          </div>
         ))}
-      </Grid>
+      </div>
     )
   }
 
@@ -185,16 +40,17 @@ const MenuPlanning = () => {
     return (
       <div>
         {weeklyMenu.map((dayMenu, index) => (
-          <Accordion key={index} className={classes.accordion}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls={`panel-${index}`}
-              id={`panel-${index}`}
+          <div key={index} className="mb-4">
+            <button
+              className="flex w-full items-center justify-between rounded-lg bg-gray-100 p-4"
+              type="button"
+              onClick={() => {}}
             >
-              <Typography variant="h6">{dayMenu.day}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>{renderMenuItems(dayMenu.dishes)}</AccordionDetails>
-          </Accordion>
+              <h2 className="text-lg font-medium">{dayMenu.day}</h2>
+              <ExpandMoreIcon className="text-gray-500" />
+            </button>
+            <div>{renderMenuItems(dayMenu.dishes)}</div>
+          </div>
         ))}
       </div>
     )
@@ -206,49 +62,44 @@ const MenuPlanning = () => {
     return (
       <div>
         {categories.map((category, index) => (
-          <Accordion key={index} className={classes.accordion}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls={`panel-${index}`}
-              id={`panel-${index}`}
+          <div key={index} className="mb-4">
+            <button
+              className="flex w-full items-center justify-between rounded-lg bg-gray-100 p-4"
+              type="button"
+              onClick={() => {}}
             >
-              <Typography variant="h6">{category}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {renderMenuItems(dailyMenu.filter((item) => item.category === category))}
-            </AccordionDetails>
-          </Accordion>
+              <h2 className="text-lg font-medium">{category}</h2>
+              <ExpandMoreIcon className="text-gray-500" />
+            </button>
+            <div>{renderMenuItems(dailyMenu.filter((item) => item.category === category))}</div>
+          </div>
         ))}
       </div>
     )
   }
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
-        <Tabs value={selectedTab} onChange={handleTabChange} className={classes.tabs}>
-          <Tab
-            label="Plats Journaliers"
-            className={`${classes.tab} ${selectedTab === 0 ? classes.selectedTab : ''}`}
-          />
-          <Tab
-            label="Planning Semaine"
-            className={`${classes.tab} ${selectedTab === 1 ? classes.selectedTab : ''}`}
-          />
-        </Tabs>
-      </AppBar>
-      {selectedTab === 0 && (
-        <div>
-          <Typography variant="h6" gutterBottom></Typography>
-          {renderDailyMenu()}
-        </div>
-      )}
-      {selectedTab === 1 && (
-        <div>
-          <Typography variant="h6" gutterBottom></Typography>
-          {renderWeeklyMenu()}
-        </div>
-      )}
+    <div className="space-y-4">
+      <div className="flex items-center space-x-4">
+        <button
+          className={`rounded-tl-lg px-4 py-2 text-lg font-medium focus:outline-none ${
+            selectedTab === 0 ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800'
+          }`}
+          onClick={(e) => handleTabChange(e, 0)}
+        >
+          Plats Journaliers
+        </button>
+        <button
+          className={`rounded-tr-lg px-4 py-2 text-lg font-medium focus:outline-none ${
+            selectedTab === 1 ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-800'
+          }`}
+          onClick={(e) => handleTabChange(e, 1)}
+        >
+          Planning Semaine
+        </button>
+      </div>
+      {selectedTab === 0 && <div>{renderDailyMenu()}</div>}
+      {selectedTab === 1 && <div>{renderWeeklyMenu()}</div>}
     </div>
   )
 }
